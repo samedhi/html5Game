@@ -15,7 +15,8 @@
     (render [_]
       (html [:div {:id "page"}
              [:div {:id "top_bar"}]
-             [:div {:id "game"}]
+             [:div {:id "game"}
+              [:div {:id "board"}]]
              [:div {:id "footer_bar"}]
              [:div {:id "start_game" 
                     :class (str "dialog " (if (= state :initial) "visible" "invisible"))
