@@ -22,14 +22,16 @@
     :start-game (assoc state :state :playing)
     state))
 
-(defn dispatch 
-  "applies the 'msg to the 'state of the world and returns a new state"
+(defn dispatch-fx
+  "applies 'msg to the 'state of the world and returns a new state of the world"
   [state msg]
-  (let [new-state (dispatcher state msg)]
-    (if (and CONSOLE_MESSAGES? (= new-state state))
-      (js/console.warn (str "I was unable\\ignored the message: " (pr-str msg)))
-      (js/console.log (str "message <= " (pr-str msg))))
-    new-state))
+  (if (and (-> msg :action (= :render)) (-> state :transitions count zero?))
+    state
+    (let [new-state (dispatcher state msg)]
+      (if (and CONSOLE_MESSAGES? (= new-state state))
+        (js/console.warn (str "I was unable\\ignored the message: " (pr-str msg)))
+        (js/console.log (str "message <= " (pr-str msg))))
+      new-state)))
 
-(defn state-dispatch [msg]
-  (swap! STATE dispatch msg))
+(defn dispatch [msg]
+  (swap! STATE dispatch-fx msg))
