@@ -4,6 +4,7 @@
    [om.dom :as dom :include-macros true]
    [sablono.core :as html :refer-macros [html]]
    [html5game.state :refer [STATE] :as state]
+   [html5game.future :as future]
    html5game.game-loop
    goog.dom
    goog.style))
