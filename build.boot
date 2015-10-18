@@ -9,7 +9,8 @@
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
                  [org.omcljs/om "0.9.0"]
                  [pandeiro/boot-http  "0.7.0-SNAPSHOT"]
-                 [sablono "0.3.6"]])
+                 [sablono "0.3.6"]
+                 [binaryage/devtools "0.3.0"]])
 
 (require
  '[adzerk.boot-cljs      :refer [cljs]]

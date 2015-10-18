@@ -1,13 +1,16 @@
 (ns html5game.core
   (:require
+   goog.dom
+   goog.style
+   [devtools.core :as devtools]
+   [html5game.future :as future]
+   [html5game.game-loop]
+   [html5game.state :refer [STATE] :as state]
    [om.core :as om :include-macros true]
    [om.dom :as dom :include-macros true]
-   [sablono.core :as html :refer-macros [html]]
-   [html5game.state :refer [STATE] :as state]
-   [html5game.future :as future]
-   html5game.game-loop
-   goog.dom
-   goog.style))
+   [sablono.core :as html :refer-macros [html]]))
+
+(devtools/install!)
 
 (enable-console-print!)
 
