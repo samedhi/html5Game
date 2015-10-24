@@ -1,8 +1,6 @@
-(ns html5game.model
-  (:require 
-   [html5game.config :refer [CONSOLE_MESSAGES?]]))
+(ns html5game.model)
 
-(defonce STATE (atom {:state :initial}))
+(defonce STATE (atom {:state :loading}))
 
 (js/console.log (pr-str @STATE))
 

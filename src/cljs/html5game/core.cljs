@@ -25,11 +25,15 @@
               [:div {:id "board"}]]
              [:div {:id "footer_bar"}]
              [:div {:id "start_game"
-                    :class (str "dialog " (if (= state :initial) "visible" "invisible"))
+                    :class (str "dialog " (condp = state
+                                            :loading "disabled"
+                                            :initial "visible"
+                                            "invisible"))
                     :on-click #(controller/dispatch {:action :start-game})}
               [:div {:id "start_game_message"}
                [:h2 "Start a new Game"]]
-              [:div {:class "but_start_game button"} "New Game"]]]))))
+              [:div {:class "but_start_game button"} "New Game"]]
+             [:canvas {:id "game_canvas" :width "1000" :height "620"}]]))))
 
 (om/root
  view
