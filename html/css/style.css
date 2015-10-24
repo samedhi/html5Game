@@ -133,8 +133,3 @@ body {
 .bubble_3{
     background-position: 0 -150px;
 }
-
-#game_canvas {
-    width: 1000px;
-    height: 620px;
-}

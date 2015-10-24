@@ -21,8 +21,7 @@
     (render [_]
       (html [:div {:id "page"}
              [:div {:id "top_bar"}]
-             [:div {:id "game"}
-              [:div {:id "board"}]]
+             [:canvas {:id "game" :width "1000" :height "620"}]
              [:div {:id "footer_bar"}]
              [:div {:id "start_game"
                     :class (str "dialog " (condp = state
@@ -32,8 +31,7 @@
                     :on-click #(controller/dispatch {:action :start-game})}
               [:div {:id "start_game_message"}
                [:h2 "Start a new Game"]]
-              [:div {:class "but_start_game button"} "New Game"]]
-             [:canvas {:id "game_canvas" :width "1000" :height "620"}]]))))
+              [:div {:class "but_start_game button"} "New Game"]]]))))
 
 (om/root
  view
