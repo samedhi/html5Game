@@ -1,6 +1,6 @@
 (ns html5game.game-loop
   (:require
-   [html5game.state :as state]
+   [html5game.controller :as controller]
    goog.async.AnimationDelay))
 
 (defn on-next-frame [fx]
@@ -8,6 +8,6 @@
 
 (defn render-message [t]
   (on-next-frame render-message)
-  (state/dispatch {:action :render :time t}))
+  (controller/dispatch {:action :render :time t}))
 
 (on-next-frame render-message)

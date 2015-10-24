@@ -1,21 +1,7 @@
-(ns html5game.state)
-
-(enable-console-print!)
-
-;; The CONSTANTS
-(def CONSOLE_MESSAGES? true)
-
-;; The MODEL
-(defonce STATE (atom {:state :initial}))
-
-(js/console.log (pr-str @STATE))
-
-(add-watch
- STATE
- :state-change
- (fn [_ _ o n] (when (not= o n) (js/console.log (str "state => " (pr-str n))))))
-
-;; The CONTROLLER
+(ns html5game.controller
+  (:require 
+   [html5game.config :refer [CONSOLE_MESSAGES?]]
+   [html5game.model :refer [STATE]]))
 
 (declare dispatch-fx)
 
