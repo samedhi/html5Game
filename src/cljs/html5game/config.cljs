@@ -17,3 +17,5 @@
 (def SPRITE_SHEET_CLIP_BOUNDARY 50)
 
 (def POP_SRC "sound/pop.mp3")
+
+(def BUBBLE_VELOCITY 1500)
