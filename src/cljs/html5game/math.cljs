@@ -28,3 +28,35 @@
       (let [t (-> t (max 0) (min max-t))]
         {:x (min (* rate-x config/BUBBLE_VELOCITY t) max-x)
          :y (min (* rate-y config/BUBBLE_VELOCITY t) max-y)}))))
+
+(defn collisions [bubbles {:keys [x y] :as fired-bubble} angle]
+  (let [o (/ config/BUBBLE_DIAMETER 2)
+        start-left  (+ x o)
+        start-top (+ y o)
+        dx (js/Math.sin angle)
+        dy (js/Math.sin angle)
+        wiggle-factor (* config/BUBBLE_DIAMETER 0.75)]
+    (for [{:keys [x y] :as bubble} bubbles
+          :let [x-distance (- start-left x)
+                y-distance (- start-top y)
+                t (+ (* dx x-distance) (* dy y-distance))
+                ex (+ (* t dx -1) start-left)
+                ey (+ (* t dy -1) start-top)
+                dist-ec (derive-hypoteneus (- ex x) (- ey y))]
+          :when (< dist-ec wiggle-factor)]
+      (let [dt (js/Math.sqrt (- (js/Math.pow config/BUBBLE_DIAMETER 2)
+                                (js/Math.pow dist-ec 2)))]
+        (->> [{:v (- t dt) :p 1} {:v (+ t dt) :p -1}]
+             (map (fn [{:keys [v p]}]
+                    (let [x-offset (* v dx)
+                          y-offset (* v dy -1)
+                          distance (derive-hypoteneus x-offset y-offset)
+                          x (+ (* x-offset p) start-left)
+                          y (+ y-offset start-top)]
+                      {:x-offset x-offset :y-offset y-offset
+                       :x x :y y
+                       :distance distance
+                       :bubble bubble})))
+             vec
+             (sort-by :distance)
+             first)))))
