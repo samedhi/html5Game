@@ -29,10 +29,11 @@
         {:x (min (* rate-x config/BUBBLE_VELOCITY t) max-x)
          :y (min (* rate-y config/BUBBLE_VELOCITY t) max-y)}))))
 
+;; http://www.gamasutra.com/view/feature/131424/pool_hall_lessons_fast_accurate_.php
+;; http://paulbourke.net/geometry/
+
 (defn collisions [bubbles {:keys [x y] :as fired-bubble} angle]
-  (let [o (/ config/BUBBLE_DIAMETER 2)
-        start-left  (+ x o)
-        start-top (+ y o)
+  (let [[start-left start-top] [x y]
         dx (js/Math.sin angle)
         dy (js/Math.sin angle)
         wiggle-factor (* config/BUBBLE_DIAMETER 0.75)]
